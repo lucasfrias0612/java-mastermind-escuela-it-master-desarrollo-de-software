@@ -1,0 +1,55 @@
+@startuml
+
+title Mastermind
+
+package "app.utils" #DDDDDD {
+  class Console
+  class YesNoDialog
+  class Message
+}
+
+package "app.domain"{
+  class Mastermind
+  class Board
+  class Player
+  class Combination
+  class SecretCombination
+  class CombinationComparationResult
+  class Attempt
+  enum Color {
+    RED
+    BLUE
+    YELLOW
+    GREEN
+    ORANGE
+    PURPLE
+  }
+}
+
+Mastermind *-->"1" Board
+Mastermind *-->"1" Player
+Console <.. Board
+Console <.. Combination
+Console <.. SecretCombination
+Console <.. Attempt
+Console <.. YesNoDialog
+Console <.. CombinationComparationResult
+Board --> Player
+Board o--> "10" Attempt
+Board ..> Combination
+Board *--> SecretCombination
+Board ..> Message
+Player ..> Combination
+Player ..> YesNoDialog
+Player ..> Message
+Attempt -->"2" Combination
+Attempt -->"1" CombinationComparationResult
+Attempt ..> Message
+Combination *--> "4" Color
+Combination ..> Message
+SecretCombination -up-|> Combination
+SecretCombination ..> Color
+CombinationComparationResult o--> Color
+CombinationComparationResult ..> Message
+
+@enduml
