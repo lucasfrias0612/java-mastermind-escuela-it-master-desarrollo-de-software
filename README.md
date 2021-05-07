@@ -1,1 +1,2 @@
 # java-mastermind-escuela-it-master-desarrollo-de-software
+![class diagram image](https://raw.githubusercontent.com/lucasfrias0612/java-mastermind-escuela-it-master-desarrollo-de-software/main/docs/plantuml/class-diagram-basic-funcionality-document-view.png "Diagrama de clases con arquitectura Document-View")

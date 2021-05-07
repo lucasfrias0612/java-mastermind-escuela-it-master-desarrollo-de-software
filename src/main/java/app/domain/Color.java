@@ -3,7 +3,7 @@ package app.domain;
 import java.util.Arrays;
 import java.util.Random;
 
-enum Color {
+public enum Color {
 	RED('r'), BLUE('b'), YELLOW('y'), GREEN('g'), ORANGE('o'), PURPLE('p'), NULL('X');
 
 	private char initial;

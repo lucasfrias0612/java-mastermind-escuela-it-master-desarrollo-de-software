@@ -1,14 +1,12 @@
 package app.domain;
 
-import app.utils.Console;
-import app.utils.Message;
-
 public class Attempt {
 	private Combination secretCombination;
 	private Combination proposedCombination;
 	private CombinationComparationResult comparationResult;
 
 	public Attempt(Combination secretCombination, Combination proposedCombination) {
+		assert secretCombination != null && proposedCombination != null;
 		this.secretCombination = secretCombination;
 		this.proposedCombination = proposedCombination;
 		this.comparationResult = this.getResult();
@@ -32,10 +30,11 @@ public class Attempt {
 		return this.comparationResult.countBlacks() == this.secretCombination.size();
 	}
 
-	public void write() {
-		Console console = Console.instance();
-		this.proposedCombination.write();
-		console.write(Message.NEW_BLANK_SPACE + Message.RIGHT_ARROW + Message.NEW_BLANK_SPACE);
-		this.comparationResult.write();
+	public Combination getProposedCombination() {
+		return this.proposedCombination;
+	}
+
+	public CombinationComparationResult getComparationResult() {
+		return this.comparationResult;
 	}
 }

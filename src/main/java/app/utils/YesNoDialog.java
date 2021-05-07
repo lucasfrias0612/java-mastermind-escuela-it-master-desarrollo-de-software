@@ -3,10 +3,10 @@ package app.utils;
 public class YesNoDialog {
 
 	public boolean read(String question) {
+		assert question != null && !question.isEmpty() && !question.isBlank();
 		Console console = Console.instance();
-		console.write(question + " (y/n):");
-		char response = console.readChar(question);
-		return response=='y' || response=='Y';
+		char response = console.readChar(question + " (y/n):");
+		return response == 'y' || response == 'Y';
 	}
 
 }

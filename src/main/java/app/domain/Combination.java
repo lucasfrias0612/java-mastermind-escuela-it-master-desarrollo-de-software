@@ -2,10 +2,8 @@ package app.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import app.utils.Console;
-import app.utils.Message;
 
-class Combination {
+public class Combination {
 	private Color[] colors;
 	private final int NUMBER_OF_COLORS = 4;
 
@@ -21,19 +19,6 @@ class Combination {
 	}
 
 	public boolean isValid() {
-		return this.isComplete() && this.hasValidColors();
-	}
-
-	private boolean isComplete() {
-		for (Color color : this.getColors()) {
-			if (color == null) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean hasValidColors() {
 		List<Color> validColors = Arrays.asList(Color.validValues());
 		for (Color color : this.getColors()) {
 			if (!validColors.contains(color)) {
@@ -43,43 +28,35 @@ class Combination {
 		return true;
 	}
 
-	public boolean contains(Color c) {
+	public boolean contains(Color color) {
 		for (int i = 0; i < this.getColors().length; i++) {
-			if (this.getColors()[i].equals(c)) {
+			if (this.getColors()[i].equals(color)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean containsAt(Color c, int position) {
-		return this.getColors()[position].equals(c);
+	public boolean containsAt(Color color, int position) {
+		assert this.getColors() != null && this.getColors()[position] != null;
+		return this.getColors()[position].equals(color);
+	}
+
+	public void setCombinationAsString(String combination) {
+		assert combination != null && combination.length() == NUMBER_OF_COLORS;
+		for (int i = 0; i < combination.length(); i++) {
+			if (Color.exists(combination.charAt(i))) {
+				this.colors[i] = Color.valueOf(combination.charAt(i));
+			}
+		}
 	}
 
 	protected Color[] getColors() {
 		return this.colors;
 	}
-	
-	public void read(String title) {
-		Console console = Console.instance();
-		console.write(title);
-		String input = console.readString();
-		if (input.length() == this.getColors().length) {
-			for (int i = 0; i < input.length(); i++) {
-				if (Color.exists(input.charAt(i))) {
-					this.getColors()[i] = Color.valueOf(input.charAt(i));
-				} else {
-					console.writeln(Message.WRONG_COLORS_THEY_MUST_BE + Color.validValuesAsString());
-					return;
-				}
-			}
-		} else {
-			console.writeln(Message.WRONG_COMBINATION_LENGTH);
-		}
-	}
 
-	public void write() {
-		Console.instance().write(this.toString());
+	public int size() {
+		return this.colors.length;
 	}
 
 	public String toString() {
@@ -88,10 +65,6 @@ class Combination {
 			output += color.toString();
 		}
 		return output;
-	}
-
-	public int size() {
-		return this.colors.length;
 	}
 
 }
